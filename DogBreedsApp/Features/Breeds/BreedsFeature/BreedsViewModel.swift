@@ -12,16 +12,17 @@ import BreedsDomain
 final class BreedsViewModel {
     private(set) var breeds: [Breed] = []
     private let loadBreedsUsecase: LoadBreedsUsecaseProtocol
+    private(set) var errorMessage: String?
     
     init(loadBreedsUsecase: LoadBreedsUsecaseProtocol) {
         self.loadBreedsUsecase = loadBreedsUsecase
     }
     
     func loadBreeds() async {
-        
         do {
             breeds = try await loadBreedsUsecase.execute()
         } catch {
+            errorMessage = error.localizedDescription
             debugPrint(error)
         }
     }

@@ -20,16 +20,21 @@ struct BreedsView: View {
     }
     
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns) {
-                ForEach(viewModel.breeds) { breed in
-                    BreedCardView(breed: breed)
+        if let errorMessage = viewModel.errorMessage {
+            ErrorView(errorMessage: errorMessage,
+                      onRetry: viewModel.loadBreeds)
+        } else {
+            ScrollView {
+                LazyVGrid(columns: columns) {
+                    ForEach(viewModel.breeds) { breed in
+                        BreedCardView(breed: breed)
+                    }
                 }
+                .padding()
             }
-            .padding()
-        }
-        .task {
-            await viewModel.loadBreeds()
+            .task {
+                await viewModel.loadBreeds()
+            }
         }
     }
 }
