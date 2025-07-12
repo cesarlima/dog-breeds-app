@@ -11,4 +11,5 @@ public protocol FavoriteBreedRepositoryProtocol {
     func addFavorite(_ favoriteBreed: FavoriteBreed)
     func removeFavorite(_ favoriteBreed: FavoriteBreed)
     func getFavorite(_ breedName: String) -> FavoriteBreed?
+    func loadFavorites() -> [FavoriteBreed]
 }

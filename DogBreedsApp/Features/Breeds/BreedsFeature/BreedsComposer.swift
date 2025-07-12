@@ -24,4 +24,9 @@ public enum BreedsComposer {
                                              checkFavoriteUseCase: checkFavoriteUseCase)
         return BreedDetailView(viewModel: viewModel)
     }
+    
+    public static func composeFavoritesView(loadFavoritesUseCaseProtocol: LoadFavoritesUseCaseProtocol) -> some View {
+        let viewModel = FavoritesViewModel(loadFavoritesUseCase: loadFavoritesUseCaseProtocol)
+        return FavoritesView(viewModel: viewModel)
+    }
 }

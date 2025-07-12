@@ -14,13 +14,25 @@ import BreedsData
 struct DogBreedsAppApp: App {
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                AppComposer.composeBreedsFeature()
-                    .navigationDestination(for: Breed.self) { breed in
-                        AppComposer.composeBreedDetailView(breed: breed)
+            TabView {
+                Tab("Breeds", systemImage: "dog.fill") {
+                    NavigationStack {
+                        AppComposer.composeBreedsFeature()
+                            .navigationDestination(for: Breed.self) { breed in
+                                AppComposer.composeBreedDetailView(breed: breed)
+                            }
                     }
+                }
+                
+                Tab("Favorites", systemImage: "heart.fill") {
+                    NavigationStack {
+                        AppComposer.composeFavoritesFeature()
+                            .navigationDestination(for: Breed.self) { breed in
+                                AppComposer.composeBreedDetailView(breed: breed)
+                            }
+                    }
+                }
             }
-            
         }
     }
 }
@@ -43,5 +55,11 @@ enum AppComposer {
                                                     loadBreedRamndonImageUseCase: loadBreedRamndonImageUseCase,
                                                     addRemoveFavoriteUseCase: favoriteUseCase,
                                                     checkFavoriteUseCase: favoriteUseCase)
+    }
+    
+    static func composeFavoritesFeature() -> some View {
+        let favoriteRepository = FavoriteBreedRepository()
+        let loadFavoritesUseCase = LoadFavoritesUseCase(favoriteBreedRepository: favoriteRepository)
+        return BreedsComposer.composeFavoritesView(loadFavoritesUseCaseProtocol: loadFavoritesUseCase)
     }
 }
