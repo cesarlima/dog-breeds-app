@@ -35,9 +35,13 @@ enum AppComposer {
     }
     
     static func composeBreedDetailView(breed: Breed) -> some View {
+        let favoriteRepository = FavoriteBreedRepository()
         let ramndonImageLoader = RamndonImageLoader(urlSession: urlSession)
         let loadBreedRamndonImageUseCase = LoadBreedRamndonImage(imageLoader: ramndonImageLoader)
+        let favoriteUseCase = AddRemoveFavoriteUseCase(favoriteRepository: favoriteRepository)
         return BreedsComposer.compseBreedDetailView(breed: breed,
-                                                    loadBreedRamndonImageUseCase: loadBreedRamndonImageUseCase)
+                                                    loadBreedRamndonImageUseCase: loadBreedRamndonImageUseCase,
+                                                    addRemoveFavoriteUseCase: favoriteUseCase,
+                                                    checkFavoriteUseCase: favoriteUseCase)
     }
 }

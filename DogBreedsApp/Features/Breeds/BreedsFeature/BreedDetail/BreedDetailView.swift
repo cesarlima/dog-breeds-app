@@ -34,6 +34,7 @@ public struct BreedDetailView: View {
         .padding()
         .task {
             await viewModel.loadRandomImage()
+            viewModel.loadFavorite()
         }
     }
 }

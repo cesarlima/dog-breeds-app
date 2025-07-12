@@ -15,8 +15,13 @@ public enum BreedsComposer {
     }
     
     public static func compseBreedDetailView(breed: Breed,
-                                             loadBreedRamndonImageUseCase: LoadBreedRamndonImageUseCase) -> some View {
-        let viewModel = BreedDetailViewModel(breed: breed, loadBreedRamndonImageUseCase: loadBreedRamndonImageUseCase)
+                                             loadBreedRamndonImageUseCase: LoadBreedRamndonImageUseCase,
+                                             addRemoveFavoriteUseCase: AddRemoveFavoriteUseCaseProtocol,
+                                             checkFavoriteUseCase: CheckFavoriteUseCaseProtocol) -> some View {
+        let viewModel = BreedDetailViewModel(breed: breed,
+                                             loadBreedRamndonImageUseCase: loadBreedRamndonImageUseCase,
+                                             addRemoveFavoriteUseCase: addRemoveFavoriteUseCase,
+                                             checkFavoriteUseCase: checkFavoriteUseCase)
         return BreedDetailView(viewModel: viewModel)
     }
 }

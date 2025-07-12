@@ -30,6 +30,6 @@ public final class BreedsLoader: BreedsLoaderProtocol {
     private func convertToBreeds(_ response: BreedsResponse) -> [Breed] {
         return response.message.keys.map { breedName in
             Breed(name: breedName)
-        }
+        }.sorted { $0.name < $1.name }
     }
 }

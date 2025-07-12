@@ -12,6 +12,8 @@ import BreedsDomain
 final class BreedDetailViewModel {
     private let breed: Breed
     private let loadBreedRamndonImageUseCase: LoadBreedRamndonImageUseCase
+    private let addRemoveFavoriteUseCase: AddRemoveFavoriteUseCaseProtocol
+    private let checkFavoriteUseCase: CheckFavoriteUseCaseProtocol
     private(set) var image: UIImage?
     private(set) var isLoadingImage = false
     private(set) var isFavorite = false
@@ -20,9 +22,14 @@ final class BreedDetailViewModel {
         breed.name.capitalized
     }
     
-    init(breed: Breed, loadBreedRamndonImageUseCase: LoadBreedRamndonImageUseCase) {
+    init(breed: Breed,
+         loadBreedRamndonImageUseCase: LoadBreedRamndonImageUseCase,
+         addRemoveFavoriteUseCase: AddRemoveFavoriteUseCaseProtocol,
+         checkFavoriteUseCase: CheckFavoriteUseCaseProtocol) {
         self.breed = breed
         self.loadBreedRamndonImageUseCase = loadBreedRamndonImageUseCase
+        self.addRemoveFavoriteUseCase = addRemoveFavoriteUseCase
+        self.checkFavoriteUseCase = checkFavoriteUseCase
     }
     
     func loadRandomImage() async {
@@ -39,7 +46,15 @@ final class BreedDetailViewModel {
         }
     }
     
+    func loadFavorite() {
+        isFavorite = checkFavoriteUseCase.execute(breedName: breed.name)
+    }
+    
     func toggleFavorite() {
+        guard let imageData = image?.pngData() else { return }
         isFavorite.toggle()
+        addRemoveFavoriteUseCase.execute(isFavorite: isFavorite,
+                                         breedName: breed.name,
+                                         imageData: imageData)
     }
 }
