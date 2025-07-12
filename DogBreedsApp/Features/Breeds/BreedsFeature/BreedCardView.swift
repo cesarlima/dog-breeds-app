@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import BreedsDomain
 
 struct BreedCardView: View {
     let breed: Breed

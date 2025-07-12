@@ -6,12 +6,24 @@
 //
 
 import SwiftUI
+import BreedsFeature
+import BreedsDomain
+import BreedsData
 
 @main
 struct DogBreedsAppApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            AppComposer.composeBreedsFeature()
         }
+    }
+}
+
+enum AppComposer {
+    private static let urlSession = URLSession(configuration: .ephemeral)
+    static func composeBreedsFeature() -> some View {
+        let breedsLoader = BreedsLoader(urlSession: urlSession)
+        let loadBreedsUsecase = LoadBreedsUsecase(breedsLoader: breedsLoader)
+        return BreedsComposer.composeBreedsView(loadBreedsUsecase: loadBreedsUsecase)
     }
 }
