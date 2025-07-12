@@ -20,4 +20,8 @@ final class FavoritesViewModel {
     func loadFavorites() {
         favorites = loadFavoritesUseCase.execute()
     }
+    
+    func createBreed(from favorite: FavoriteBreed) -> Breed {
+        return Breed(name: favorite.breedName)
+    }
 }

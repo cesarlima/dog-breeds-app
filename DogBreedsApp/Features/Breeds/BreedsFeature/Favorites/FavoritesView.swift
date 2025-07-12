@@ -17,14 +17,16 @@ public struct FavoritesView: View {
     
     public var body: some View {
         List(viewModel.favorites, id: \.breedName) { favorite in
-            HStack {
-                if let image = UIImage(data: favorite.imageData) {
-                    Image(uiImage: image)
-                        .resizable()
-                        .frame(width: 50, height: 50)
+            NavigationLink(value: viewModel.createBreed(from: favorite)) {
+                HStack {
+                    if let image = UIImage(data: favorite.imageData) {
+                        Image(uiImage: image)
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                    }
+                    
+                    Text(favorite.breedName.capitalized)
                 }
-                
-                Text(favorite.breedName.capitalized)
             }
         }
         .onAppear {
