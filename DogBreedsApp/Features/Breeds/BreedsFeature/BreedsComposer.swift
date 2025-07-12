@@ -13,4 +13,10 @@ public enum BreedsComposer {
         let viewModel = BreedsViewModel(loadBreedsUsecase: loadBreedsUsecase)
         return BreedsView(viewModel: viewModel)
     }
+    
+    public static func compseBreedDetailView(breed: Breed,
+                                             loadBreedRamndonImageUseCase: LoadBreedRamndonImageUseCase) -> some View {
+        let viewModel = BreedDetailViewModel(breed: breed, loadBreedRamndonImageUseCase: loadBreedRamndonImageUseCase)
+        return BreedDetailView(viewModel: viewModel)
+    }
 }
