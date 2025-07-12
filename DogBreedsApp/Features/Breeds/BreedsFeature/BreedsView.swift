@@ -32,6 +32,9 @@ struct BreedsView: View {
                 }
                 .padding()
             }
+            .refreshable {
+                await viewModel.loadBreeds()
+            }
             .task {
                 await viewModel.loadBreeds()
             }
