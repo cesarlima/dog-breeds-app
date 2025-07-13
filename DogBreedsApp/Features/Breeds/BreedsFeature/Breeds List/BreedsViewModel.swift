@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Observation
 import BreedsDomain
 
 @Observable
@@ -18,6 +19,7 @@ final class BreedsViewModel {
         self.loadBreedsUsecase = loadBreedsUsecase
     }
     
+    @MainActor
     func loadBreeds() async {
         do {
             breeds = try await loadBreedsUsecase.execute()

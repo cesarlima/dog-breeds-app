@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Observation
 import BreedsDomain
 
 @Observable
@@ -32,6 +33,7 @@ final class BreedDetailViewModel {
         self.checkFavoriteUseCase = checkFavoriteUseCase
     }
     
+    @MainActor
     func loadRandomImage() async {
         defer {
             isLoadingImage = false
