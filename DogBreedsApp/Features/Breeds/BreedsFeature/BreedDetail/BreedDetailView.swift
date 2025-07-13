@@ -9,7 +9,7 @@ import SwiftUI
 import BreedsDomain
 
 public struct BreedDetailView: View {
-    @State private var viewModel: BreedDetailViewModel
+     private let viewModel: BreedDetailViewModel
     
     init(viewModel: BreedDetailViewModel) {
         self.viewModel = viewModel

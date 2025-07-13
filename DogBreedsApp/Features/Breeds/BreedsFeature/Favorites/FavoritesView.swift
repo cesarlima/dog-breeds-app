@@ -9,7 +9,7 @@ import SwiftUI
 import BreedsDomain
 
 public struct FavoritesView: View {
-    @State private var viewModel: FavoritesViewModel
+    private var viewModel: FavoritesViewModel
     
     init(viewModel: FavoritesViewModel) {
         self.viewModel = viewModel
@@ -38,6 +38,3 @@ public struct FavoritesView: View {
 //#Preview {
 //    FavoritesView()
 //}
-
-
-

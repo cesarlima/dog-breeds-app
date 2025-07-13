@@ -13,7 +13,7 @@ struct BreedsView: View {
         GridItem(.flexible(), spacing: 16),
     ]
     
-    @State private var viewModel: BreedsViewModel
+    private let viewModel: BreedsViewModel
     
     init(viewModel: BreedsViewModel) {
         self.viewModel = viewModel
